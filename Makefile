@@ -2,15 +2,15 @@ NAME := tplate
 VERSION := 0.1.0
 REPO_REV := $(shell git rev-parse HEAD)
 BUILD_DATE := $(shell date +%Y-%m-%d:%H:%M:%S)
-BUILD_FLAGS := -ldflags="-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV) -X main.buildDate=$(BUILD_DATE)"
+BUILD_FLAGS := "-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV) -X main.buildDate=$(BUILD_DATE)"
 
 define buildRelease
-@gox -os="$1" -arch="$2" -output="$(NAME)"
+@gox -os="$1" -arch="$2" -ldflags=$(BUILD_FLAGS) -output="$(NAME)"
 @tar cfvz $(NAME)-$(VERSION)-$1-$2.tar.gz $(NAME)
 endef
 
 build:
-	@go build $(BUILD_FLAGS)
+	@go build -ldflags=$(BUILD_FLAGS)
 
 install:
 	@go install $(BUILD_FLAGS)
