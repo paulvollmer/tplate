@@ -5,3 +5,4 @@ go:
 
 script:
   - make test
+  - make build && ./tplate -version
