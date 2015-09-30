@@ -55,7 +55,7 @@ and you run
 
 You can either specify the full path of your template, e.g. `~/templates/mytemplate.tplate` or just specify the template name and **tplate** tries to find it in your `TPLATE_PATH`-directory. To set the template-path, edit the file `~/.bash_profile` and add the following:
 
-    export TPLATE_PATH="/Users/yourname/templates"
+    export TPLATE_PATH="/Users/yourname/templates/"
 
 *Note: After editing the file `~/.bash_profile` restart Terminal or run `source ~/.bash_profile`.*
 
