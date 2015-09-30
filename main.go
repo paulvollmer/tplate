@@ -58,8 +58,8 @@ func envAction() {
 func listAction() {
 	listPath := EnvVarPath
 	if totalArgs > 2 {
-		listPath = listPath + os.Args[2]
 		fmt.Println(listPath)
+		listPath = filepath.Join(listPath, os.Args[2])
 	}
 	fmt.Printf("list templates of directory '%s'\n", listPath)
 	fmt.Printf("---------------------------\n")
@@ -95,10 +95,10 @@ func processAction() {
 	// parse the commandline args and read file.
 	if totalArgs == 1 {
 		fmt.Println("missing template source!")
-		fmt.Println("check out the tplate -help for more information")
+		fmt.Println("check out the 'tplate -help' for more information")
 		os.Exit(1)
 	} else {
-		tmpFilepath := EnvVarPath + os.Args[1] + ".tplate"
+		tmpFilepath := filepath.Join(EnvVarPath, os.Args[1]) + ".tplate"
 		tmpVars := []string{}
 		if totalArgs > 2 {
 			tmpVars = os.Args[2:]
