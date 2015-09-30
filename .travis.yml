@@ -5,7 +5,7 @@ go:
 
 env:
   global:
-    - TPLATE_PATH=$HOME/fixture
+    - TPLATE_PATH=$TRAVIS_BUILD_DIR/fixture
     - TPLATE_AUTHOR=travis
     - TPLATE_AUTHOR_EMAIL=travis@example.tld
 
