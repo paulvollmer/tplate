@@ -15,4 +15,10 @@ test:
 	@go test -cover -v
 
 clean:
-	@rm tplate
+	@rm -f tplate
+	@rm -f tplate_darwin_*
+	@rm -f tplate_freebsd_*
+	@rm -f tplate_linux_*
+	@rm -f tplate_netbsd_*
+	@rm -f tplate_openbsd_*
+	@rm -f tplate_windows_*
