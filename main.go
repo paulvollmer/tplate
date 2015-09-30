@@ -9,8 +9,9 @@ import (
 )
 
 var (
-	version string // the current version
-	gitRev  string // the git revision hash (set by the Makefile)
+	version   string // the current version
+	gitRev    string // the git revision hash (set by the Makefile)
+	buildDate string // the compile time
 
 	EnvVarPath        string // the TPLATE_PATH environment var
 	EnvVarAuthor      string // the TPLATE_AUTHOR environment var
@@ -41,7 +42,7 @@ func main() {
 	} else if *flagHelp {
 		Help()
 	} else if *flagVersion {
-		fmt.Println(version + " rev: " + gitRev)
+		fmt.Printf("version: %s rev: %s build-date: %s\n", version, gitRev, buildDate)
 	} else {
 		// parse the commandline args and read file.
 		totalArgs := len(os.Args)

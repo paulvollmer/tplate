@@ -1,10 +1,15 @@
 .PHONY: build test clean
 
-VERSION := v0.1.0
-REPO_REV := $(shell git rev-parse HEAD)
+VERSION := 0.1.0
+REPO_REV := $(shell git rev-parse --short HEAD)
+BUILD_DATE := $(shell date +%Y-%m-%d:%H:%M:%S)
+BUILD_FLAGS := -ldflags="-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV) -X main.buildDate=$(BUILD_DATE)"
 
 build:
-	@go build -ldflags "-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV)"
+	@go build $(BUILD_FLAGS)
+
+install:
+	@go install $(BUILD_FLAGS)
 
 test:
 	@go test -cover -v
