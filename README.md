@@ -39,17 +39,17 @@ _Note: you only have to specify the filename-prefix, in this case `go`, **tplate
 You can also pass variables to the template by using a `key=value` syntax, **tplate** will then replace every occurence of `{{.foo}}` with `bar`. If your template `hello.tplate` looks like this:
 
 ````
-Hello template {{.world}}
+{{.foo}} {{.bar}}
 ```
 
 and you run 
 
-    tplate hello world=foo > helloworld.txt
+    tplate hello foo="Hello" bar="Template"
 
-`helloworld.txt` will look like this:  
+You will see:  
 
-    Hello template foo
-    
+    Hello Template
+
     
 ### Template path / environment variable
 
