@@ -3,6 +3,12 @@ language: go
 go:
   - 1.5
 
+env:
+  global:
+    - TPLATE_PATH=$HOME/fixture
+    - TPLATE_AUTHOR=travis
+    - TPLATE_AUTHOR_EMAIL=travis@example.tld
+
 script:
   - make test
   - make build
@@ -10,6 +16,6 @@ script:
   - ./tplate -help
   - ./tplate -env
   - ./tplate -list
-  - ./tplate fixture/hello
-  - ./tplate fixture/foo/var1
-  - ./tplate fixture/foo/var2
+  - ./tplate hello
+  - ./tplate foo/var1
+  - ./tplate foo/var2
