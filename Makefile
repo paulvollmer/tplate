@@ -13,7 +13,7 @@ build:
 	@go build -ldflags=$(BUILD_FLAGS)
 
 install:
-	@go install $(BUILD_FLAGS)
+	@go install -ldflags=$(BUILD_FLAGS)
 
 test:
 	@go tool vet -all -v *.go
