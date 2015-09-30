@@ -1,2 +1,9 @@
+# tplate gitignore
+
 tplate
-*.exe
+tplate_darwin_*
+tplate_freebsd_*
+tplate_linux_*
+tplate_netbsd_*
+tplate_openbsd_*
+tplate_windows_*
