@@ -30,8 +30,8 @@ func main() {
 	// define and parse commandline flags
 	flagEnv := flag.Bool("env", false, "the environment vars")
 	flagList := flag.Bool("list", false, "list all templates")
-	flagHelp := flag.Bool("help", false, "show the help")
-	flagVersion := flag.Bool("version", false, "print the version")
+	flagHelp := flag.Bool("help", false, "print the help and exit")
+	flagVersion := flag.Bool("version", false, "print the version and exit")
 	flag.Parse()
 
 	if *flagEnv {
@@ -42,7 +42,9 @@ func main() {
 	} else if *flagHelp {
 		Help()
 	} else if *flagVersion {
-		fmt.Printf("version: %s rev: %s build-date: %s\n", version, gitRev, buildDate)
+		fmt.Printf("Version    : %s\n", version)
+		fmt.Printf("Revision   : %s\n", gitRev)
+		fmt.Printf("Build-Date : %s\n", buildDate)
 	} else {
 		// parse the commandline args and read file.
 		totalArgs := len(os.Args)
