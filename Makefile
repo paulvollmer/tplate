@@ -1,5 +1,5 @@
 NAME := tplate
-VERSION := 0.1.0
+VERSION := 0.1.1
 REPO_REV := $(shell git rev-parse HEAD)
 BUILD_DATE := $(shell date +%Y-%m-%d:%H:%M:%S)
 BUILD_FLAGS := "-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV) -X main.buildDate=$(BUILD_DATE)"
