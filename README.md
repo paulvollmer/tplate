@@ -24,7 +24,7 @@ The template engine is the core golang text/template and you can find more usage
 
 ## Installation
 You can download the latest release from the [GitHub Release Page](http://github.com/paulvollmer/tplate/releases)
-and put it into your `$PATH`.  
+and copy it to a location in your `$PATH`.  
 Also you can install it from source. Simple run...
 
     go get github.com/paulvollmer/tplate
