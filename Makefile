@@ -16,7 +16,7 @@ install:
 	@go install $(BUILD_FLAGS)
 
 test:
-	@go tool vet *.go
+	@go tool vet -all -v *.go
 	@go test -cover -v
 
 release:
