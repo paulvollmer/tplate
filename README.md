@@ -1,4 +1,4 @@
-# tplate
+# tplate [![Build Status](https://travis-ci.org/paulvollmer/tplate.svg?branch=master)](https://travis-ci.org/paulvollmer/tplate)
 
 
 ## What is tplate
