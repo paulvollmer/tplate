@@ -16,6 +16,8 @@ var (
 	EnvVarPath        string // the TPLATE_PATH environment var
 	EnvVarAuthor      string // the TPLATE_AUTHOR environment var
 	EnvVarAuthorEmail string // the TPLATE_AUTHOR_EMAIL environment var
+
+	totalArgs = len(os.Args) // get the total number of arguments
 )
 
 func main() {
@@ -35,43 +37,33 @@ func main() {
 	flag.Parse()
 
 	if *flagEnv {
-		PrintEnvVars()
+		envAction()
 	} else if *flagList {
-		fmt.Printf("list directory '%s'\n", EnvVarPath)
-		ListFiles(EnvVarPath, "")
+		listAction()
 	} else if *flagHelp {
-		Help()
+		helpAction()
 	} else if *flagVersion {
-		fmt.Printf("Version    : %s\n", version)
-		fmt.Printf("Revision   : %s\n", gitRev)
-		fmt.Printf("Build-Date : %s\n", buildDate)
+		versionAction()
 	} else {
-		// parse the commandline args and read file.
-		totalArgs := len(os.Args)
-		if totalArgs == 1 {
-			fmt.Println("missing template source!")
-			fmt.Println("check out the tplate -help for more information")
-			os.Exit(1)
-		} else {
-			tmpFilepath := EnvVarPath + os.Args[1] + ".tplate"
-			tmpVars := []string{}
-			if totalArgs > 2 {
-				tmpVars = os.Args[2:]
-			}
-			result, err := Process(tmpFilepath, tmpVars)
-			if err != nil {
-				fmt.Println(err)
-				os.Exit(2)
-			}
-			fmt.Print(string(result))
-		}
+		processAction()
 	}
 }
 
-func PrintEnvVars() {
+func envAction() {
 	fmt.Printf("TPLATE_PATH         = %s\n", EnvVarPath)
 	fmt.Printf("TPLATE_AUTHOR       = %s\n", EnvVarAuthor)
 	fmt.Printf("TPLATE_AUTHOR_EMAIL = %s\n", EnvVarAuthorEmail)
+}
+
+func listAction() {
+	listPath := EnvVarPath
+	if totalArgs > 2 {
+		listPath = listPath + os.Args[2]
+		fmt.Println(listPath)
+	}
+	fmt.Printf("list templates of directory '%s'\n", listPath)
+	fmt.Printf("---------------------------\n")
+	ListFiles(listPath, "")
 }
 
 func ListFiles(src, prefix string) {
@@ -89,6 +81,33 @@ func ListFiles(src, prefix string) {
 	}
 }
 
-func Help() {
+func helpAction() {
 	flag.Usage()
+}
+
+func versionAction() {
+	fmt.Printf("Version    : %s\n", version)
+	fmt.Printf("Revision   : %s\n", gitRev)
+	fmt.Printf("Build-Date : %s\n", buildDate)
+}
+
+func processAction() {
+	// parse the commandline args and read file.
+	if totalArgs == 1 {
+		fmt.Println("missing template source!")
+		fmt.Println("check out the tplate -help for more information")
+		os.Exit(1)
+	} else {
+		tmpFilepath := EnvVarPath + os.Args[1] + ".tplate"
+		tmpVars := []string{}
+		if totalArgs > 2 {
+			tmpVars = os.Args[2:]
+		}
+		result, err := Process(tmpFilepath, tmpVars)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(2)
+		}
+		fmt.Print(string(result))
+	}
 }
