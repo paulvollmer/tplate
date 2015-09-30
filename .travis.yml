@@ -17,5 +17,5 @@ script:
   - ./tplate -env
   - ./tplate -list
   - ./tplate hello
-  - ./tplate foo/var1
-  - ./tplate foo/var2
+  - ./tplate foo/var1 Foo=123
+  - ./tplate foo/var2 Foo=123 Bar=456
