@@ -1,6 +1,13 @@
 # tplate gitignore
 
+# ignore go build binaries
 tplate
+tplate.exe
+
+# ignore release tar archives
+*.tar.gz
+
+# ignore gox binaries
 tplate_darwin_*
 tplate_freebsd_*
 tplate_linux_*
