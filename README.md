@@ -28,7 +28,7 @@ and put it into your `$PATH`.
 Also you can install it from source. Simple run...
 
     go get github.com/paulvollmer/tplate
-    cd $GOPATH/github.com/paulvollmer/tplate
+    cd $GOPATH/src/github.com/paulvollmer/tplate
     make install
 
 
