@@ -5,4 +5,11 @@ go:
 
 script:
   - make test
-  - make build && ./tplate -version
+  - make build
+  - ./tplate -version
+  - ./tplate -help
+  - ./tplate -env
+  - ./tplate -list
+  - ./tplate fixture/hello
+  - ./tplate fixture/foo/var1
+  - ./tplate fixture/foo/var2
