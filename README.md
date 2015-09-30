@@ -31,7 +31,7 @@ Now you can run
 
 and tplate will create a new file `my_new_go_project.go` with the contents of your template.
     
-*Note: you only have to specify the filename-prefix, in this case `go`, **tplate** will then look for a file called `go.tplate`
+*Note: you only have to specify the filename-prefix, in this case `go`, **tplate** will then look for a file called `go.tplate`*
 
 
 ### Template with variables
