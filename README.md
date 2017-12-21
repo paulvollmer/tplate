@@ -21,7 +21,7 @@ First create a new template-file. Let’s create a template for the [go](https:/
 
 Create a new directory where you store your templates:
 
-```
+```sh
 mkdir ~/tplate
 ```
 
@@ -36,8 +36,9 @@ func main() {
 ```
 
 Now you can run
-
-    tplate ~/tplate/go > my_new_go_project.go
+```sh
+tplate ~/tplate/go > my_new_go_project.go
+```
 
 and tplate will create a new file `my_new_go_project.go` with the contents of your template.
 
@@ -53,25 +54,30 @@ You can also pass variables to the template by using a `key=value` syntax, **tpl
 ```
 
 and you run
-
-    tplate hello foo="Hello" bar="Template"
+```sh
+tplate hello foo="Hello" bar="Template"
+```
 
 You will see:  
-
-    Hello Template
-
+```
+Hello Template
+```
 
 ### Template path / environment variable
 
 You can either specify the full path of your template, e.g. `~/tplate/mytemplate.tplate` or just specify the template name and **tplate** tries to find it in your `TPLATE_PATH`-directory. To set the template-path, edit the file `~/.bash_profile` and add the following:
 
-    export TPLATE_PATH="/Users/yourname/templates/"
+```sh
+export TPLATE_PATH="/Users/yourname/templates/"
+```
 
 *Note: After editing the file `~/.bash_profile` restart Terminal or run `source ~/.bash_profile`.*
 
 After you set up your `TPLATE_PATH`, you can simply use the template name like this:
 
-    tplate mytemplate > mynewproject.src
+```sh
+tplate mytemplate > mynewproject.xyz
+```
 
 … and **tplate** will look for the template `/Users/yourname/tplate/mytemplate`.
 
