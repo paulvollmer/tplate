@@ -1,5 +1,9 @@
+#
+# tplate Makefile
+#
+
 NAME := tplate
-VERSION := 0.1.1
+VERSION := 0.1.2
 REPO_REV := $(shell git rev-parse HEAD)
 BUILD_DATE := $(shell date +%Y-%m-%d:%H:%M:%S)
 BUILD_FLAGS := "-X main.version=$(VERSION) -X main.gitRev=$(REPO_REV) -X main.buildDate=$(BUILD_DATE)"
@@ -8,6 +12,11 @@ define buildRelease
 @gox -os="$1" -arch="$2" -ldflags=$(BUILD_FLAGS) -output="$(NAME)"
 @tar cfvz $(NAME)-$(VERSION)-$1-$2.tar.gz $(NAME)
 endef
+
+all: build test release
+
+deps:
+	go get github.com/mitchellh/gox
 
 build:
 	@go build -ldflags=$(BUILD_FLAGS)

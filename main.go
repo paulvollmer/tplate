@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
+	"strings"
 )
 
 var (
@@ -31,39 +33,66 @@ func main() {
 
 	// define and parse commandline flags
 	flagEnv := flag.Bool("env", false, "the environment vars")
+	flagInit := flag.Bool("init", false, "initialize the template directory")
 	flagList := flag.Bool("list", false, "list all templates")
 	flagHelp := flag.Bool("help", false, "print the help and exit")
+	flagOutpath := flag.String("o", "", "output path")
 	flagVersion := flag.Bool("version", false, "print the version and exit")
 	flag.Parse()
 
 	if *flagEnv {
-		envAction()
+		actionEnv()
+	} else if *flagInit {
+		actionInit()
 	} else if *flagList {
-		listAction()
+		actionList()
 	} else if *flagHelp {
-		helpAction()
+		actionHelp()
 	} else if *flagVersion {
-		versionAction()
+		actionVersion()
 	} else {
 		processAction()
 	}
 }
 
-func envAction() {
+func actionEnv() {
 	fmt.Printf("TPLATE_PATH         = %s\n", EnvVarPath)
 	fmt.Printf("TPLATE_AUTHOR       = %s\n", EnvVarAuthor)
 	fmt.Printf("TPLATE_AUTHOR_EMAIL = %s\n", EnvVarAuthorEmail)
 }
 
-func listAction() {
+func actionInit() {
+	if EnvVarPath == "" {
+		fmt.Println("No TPLATE_PATH defined")
+		os.Exit(127)
+	}
+	// TODO: clone a tplate collection repository
+	_, err := ioutil.ReadDir(EnvVarPath)
+	if err != nil {
+		err = os.Mkdir(EnvVarPath, 0644)
+		if err != nil {
+			fmt.Println("ERROR", err)
+			os.Exit(127)
+		}
+		fmt.Println("created 'tplate' directory")
+		fmt.Println("now you can start creating a template file you can call with the cli")
+		fmt.Println("")
+		fmt.Println("  echo 'hello world' > $TPLATE_PATH/example.tplate")
+		fmt.Println("  tplate example")
+		fmt.Println("")
+		os.Exit(128)
+	}
+}
+
+func actionList() {
 	listPath := EnvVarPath
 	if totalArgs > 2 {
 		fmt.Println(listPath)
 		listPath = filepath.Join(listPath, os.Args[2])
 	}
-	fmt.Printf("list templates of directory '%s'\n", listPath)
-	fmt.Printf("---------------------------\n")
+	fmt.Printf("list templates of directory %q\n\n", listPath)
 	ListFiles(listPath, "")
+	fmt.Println("")
 }
 
 func ListFiles(src, prefix string) {
@@ -73,19 +102,27 @@ func ListFiles(src, prefix string) {
 		os.Exit(1)
 	}
 	for _, file := range tmp {
+		name := file.Name()
 		if file.IsDir() {
-			ListFiles(src+string(filepath.Separator)+file.Name(), file.Name()+string(filepath.Separator))
+			// ignore some dirs
+			if name != ".git" {
+				ListFiles(src+string(filepath.Separator)+file.Name(), file.Name()+string(filepath.Separator))
+			}
 		} else {
-			fmt.Println(prefix + file.Name())
+			ext := path.Ext(name)
+			if ext == ".tplate" {
+				result := strings.Split(file.Name(), ext)
+				fmt.Println(prefix + result[0])
+			}
 		}
 	}
 }
 
-func helpAction() {
+func actionHelp() {
 	flag.Usage()
 }
 
-func versionAction() {
+func actionVersion() {
 	fmt.Printf("Version    : %s\n", version)
 	fmt.Printf("Revision   : %s\n", gitRev)
 	fmt.Printf("Build-Date : %s\n", buildDate)
