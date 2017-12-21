@@ -13,7 +13,12 @@ define buildRelease
 @tar cfvz $(NAME)-$(VERSION)-$1-$2.tar.gz $(NAME)
 endef
 
-all: build test release
+all: test release
+
+lint:
+	@go fmt
+	@golint
+	@go tool vet -all -v *.go
 
 deps:
 	go get github.com/mitchellh/gox
@@ -24,9 +29,9 @@ build:
 install:
 	@go install -ldflags=$(BUILD_FLAGS)
 
-test:
-	@go tool vet -all -v *.go
-	@go test -cover -v
+test: clean lint build
+	@go test
+	# -cover -v
 
 release:
 	$(MAKE) release-darwin-386
@@ -59,6 +64,7 @@ release-windows-amd64:
 	$(call buildRelease,windows,amd64)
 
 clean:
+	@rm -fr tmp
 	@rm -f *.tar.gz
 	@rm -f $(NAME)
 	@rm -f $(NAME).exe

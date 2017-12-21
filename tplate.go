@@ -8,6 +8,7 @@ import (
 	"text/template"
 )
 
+// Process is the main tplate file processor
 func Process(filename string, vars []string) ([]byte, error) {
 	// read the template file
 	dat, err := ioutil.ReadFile(filename)
@@ -34,10 +35,14 @@ func parseData(vars []string) (map[string]string, error) {
 
 	for i := 0; i < len(vars); i++ {
 		splitted := strings.Split(vars[i], "=")
-		if len(splitted) != 2 {
+		if len(splitted) <= 1 {
 			return result, errors.New("template data " + vars[i] + " not correct")
 		}
-		result[splitted[0]] = splitted[1]
+		if result[splitted[0]] == "" {
+			result[splitted[0]] = strings.Join(splitted[1:], "=")
+		} else {
+			result[splitted[0]] += "\n" + strings.Join(splitted[1:], "=")
+		}
 	}
 	return result, nil
 }
