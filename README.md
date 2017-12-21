@@ -10,8 +10,10 @@ First create a new template-file. Let’s create a template for the [go](https:/
 
 Create a new directory where you store your templates:
 
-    mkdir ~/templates
-    
+```sh
+mkdir ~/templates
+```
+
 Then create a new file `go.tplate` and put some content in it:    
 
 ```go
@@ -23,8 +25,9 @@ func main() {
 ```
 
 Now you can run
-
-    tplate ~/templates/go > my_new_go_project.go
+```sh
+tplate ~/templates/go > my_new_go_project.go
+```
 
 and tplate will create a new file `my_new_go_project.go` with the contents of your template.
     
@@ -40,25 +43,30 @@ You can also pass variables to the template by using a `key=value` syntax, **tpl
 ```
 
 and you run 
-
-    tplate hello foo="Hello" bar="Template"
+```sh
+tplate hello foo="Hello" bar="Template"
+```
 
 You will see:  
-
-    Hello Template
-
+```
+Hello Template
+```
     
 ### Template path / environment variable
 
 You can either specify the full path of your template, e.g. `~/templates/mytemplate.tplate` or just specify the template name and **tplate** tries to find it in your `TPLATE_PATH`-directory. To set the template-path, edit the file `~/.bash_profile` and add the following:
 
-    export TPLATE_PATH="/Users/yourname/templates/"
+```sh
+export TPLATE_PATH="/Users/yourname/templates/"
+```
 
 *Note: After editing the file `~/.bash_profile` restart Terminal or run `source ~/.bash_profile`.*
 
 After you set up your `TPLATE_PATH`, you can simply use the template name like this:
 
-    tplate mytemplate > mynewproject.xyz
+```sh
+tplate mytemplate > mynewproject.xyz
+```
     
 … and **tplate** will look for the template `/Users/yourname/templates/mytemplate`.
 
@@ -73,11 +81,11 @@ The template engine is the core golang text/template.You can find more informati
 You can download the latest release from the [GitHub Release Page](http://github.com/paulvollmer/tplate/releases). Put the contents of the zip-file somewhere in you `$PATH`, e.g. `/usr/local/bin`.
 
 You can also install it from source, simply run:
-
-    go get github.com/paulvollmer/tplate
-    cd $GOPATH/src/github.com/paulvollmer/tplate
-    make install
-
+```sh
+go get github.com/paulvollmer/tplate
+cd $GOPATH/src/github.com/paulvollmer/tplate
+make install
+```
 
 ## License
 
