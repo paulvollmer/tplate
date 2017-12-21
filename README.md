@@ -1,9 +1,6 @@
 # tplate [![Build Status](https://travis-ci.org/paulvollmer/tplate.svg?branch=master)](https://travis-ci.org/paulvollmer/tplate)
 
-
-## tplate is
-
-… a commandline templating tool. The main goal of **tplate** is simplicity and customisation. If you find yourself typing the same things over and over again when starting a new project, you will save a lot of time using **tplate**. 
+tplate is a commandline templating tool. The main goal of **tplate** is simplicity and customisation. If you find yourself typing the same things over and over again when starting a new project, you will save a lot of time using **tplate**. 
 
 ## Usage
 
@@ -17,7 +14,7 @@ Create a new directory where you store your templates:
     
 Then create a new file `go.tplate` and put some content in it:    
 
-````
+```go
 package main
 
 func main() {
@@ -38,7 +35,7 @@ _Note: you only have to specify the filename-prefix, in this case `go`, **tplate
     
 You can also pass variables to the template by using a `key=value` syntax, **tplate** will then replace every occurence of `{{.foo}}` with `bar`. If your template `hello.tplate` looks like this:
 
-````
+```
 {{.foo}} {{.bar}}
 ```
 
