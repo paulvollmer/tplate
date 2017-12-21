@@ -21,7 +21,8 @@ lint:
 	@go tool vet -all -v *.go
 
 deps:
-	go get github.com/mitchellh/gox
+	go get -u github.com/golang/lint/golint
+	go get -u github.com/mitchellh/gox
 
 build:
 	@go build -ldflags=$(BUILD_FLAGS)

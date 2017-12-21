@@ -12,6 +12,9 @@ env:
     - TPLATE_AUTHOR=travis
     - TPLATE_AUTHOR_EMAIL=travis@example.tld
 
+install:
+  - make deps
+
 script:
   - make test
   - ./tplate -version
