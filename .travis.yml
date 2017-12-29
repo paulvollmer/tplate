@@ -16,6 +16,7 @@ install:
 
 script:
   - make test
+  - make build
   - ./tplate -version
   - ./tplate -help
   - ./tplate -env
