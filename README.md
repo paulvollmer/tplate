@@ -87,6 +87,13 @@ tplate mytemplate > mynewproject.xyz
 The template engine is the core golang text/template.You can find more information about it here: [text/template package documentaion](https://golang.org/pkg/text/template).
 
 
-## License
+## Versioning
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/paulvollmer/tplate/tags).
 
-Licensed under [MIT-License](LICENSE).
+## Authors
+- **[Paul Vollmer](https://github.com/paulvollmer)** - *Initial work*
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

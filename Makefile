@@ -30,9 +30,8 @@ build:
 install:
 	@go install -ldflags=$(BUILD_FLAGS)
 
-test: clean lint build
-	@go test
-	# -cover -v
+test: clean lint
+	@go test -cover -v
 
 release:
 	$(MAKE) release-darwin-386
